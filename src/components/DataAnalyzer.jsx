@@ -94,26 +94,62 @@ const DataAnalyzer = ({ item, onBack }) => {
     }
   }
 
+  const LAND_COVER_CLASSES = {
+    1: { name: 'Hohe Vegetation', color: '#0C6400' },
+    2: { name: 'Mittlere Vegetation', color: '#60C630' },
+    3: { name: 'Niedrige Vegetation', color: '#CDAA66' },
+    4: { name: 'Gebaeude', color: '#E60000' },
+    5: { name: 'Bodenflaechen', color: '#D2F0BE' },
+    6: { name: 'Gewaesser', color: '#005CE6' }
+  }
+
   const renderHistogram = (histData) => {
     const band1 = histData?.band_1
     if (!band1) return null
 
     const max = Math.max(...band1.histogram)
     const width = 100 / band1.histogram.length
+    const isSampled = histData?.band_1?.sampled
 
     return (
-      <div style={{ height: '200px', display: 'flex', alignItems: 'flex-end', gap: '1px', marginTop: '20px' }}>
-        {band1.histogram.slice(0, 64).map((val, i) => (
-          <div
-            key={i}
-            style={{
-              width: `${width}%`,
-              height: `${(val / max) * 100}%`,
-              background: '#3498db',
-              minHeight: '2px'
-            }}
-          />
-        ))}
+      <div>
+        {isSampled && (
+          <div style={{ padding: '8px 12px', background: '#fff3cd', borderRadius: '6px', marginBottom: '12px', fontSize: '0.85rem', color: '#856404' }}>
+            ⚠️ Data was sampled for performance (original: {band1.sample_size?.toLocaleString()} pixels)
+          </div>
+        )}
+        
+        <div style={{ height: '200px', display: 'flex', alignItems: 'flex-end', gap: '1px', marginTop: '20px' }}>
+          {band1.histogram.slice(0, 64).map((val, i) => {
+            // Try to determine class from bin value
+            const binValue = band1.bins?.[i] || i
+            const cls = Math.round(binValue)
+            const clsInfo = LAND_COVER_CLASSES[cls]
+            
+            return (
+              <div
+                key={i}
+                title={`Value: ${binValue.toFixed(2)}, Count: ${val.toLocaleString()}${clsInfo ? ', Class: ' + clsInfo.name : ''}`}
+                style={{
+                  width: `${width}%`,
+                  height: `${(val / max) * 100}%`,
+                  background: clsInfo?.color || '#3498db',
+                  minHeight: '2px',
+                  opacity: 0.85
+                }}
+              />
+            )
+          })}
+        </div>
+        
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginTop: '16px' }}>
+          {Object.entries(LAND_COVER_CLASSES).map(([cls, info]) => (
+            <div key={cls} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem' }}>
+              <div style={{ width: '12px', height: '12px', background: info.color, borderRadius: '2px' }} />
+              <span>{cls}: {info.name}</span>
+            </div>
+          ))}
+        </div>
       </div>
     )
   }

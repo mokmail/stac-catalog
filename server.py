@@ -71,8 +71,8 @@ def transform_bounds(bounds, src_crs, dst_crs='EPSG:4326'):
 @app.route('/api/metadata', methods=['POST'])
 def get_metadata():
     """Get COG metadata"""
-    data = request.json
-    url = data.get('url')
+    data = request.get_json()
+    url = data.get('url') if data else None
     
     if not url:
         return jsonify({'error': 'No URL provided'}), 400
@@ -345,14 +345,36 @@ def get_histogram():
     data = request.json
     url = data.get('url')
     bins = data.get('bins', 256)
+    sample_size = data.get('sample_size', 1000)  # Max samples per band
     
     try:
         with rasterio.open(url) as src:
             histogram = {}
+            
+            # For large rasters, use windowed reading
+            height, width = src.height, src.width
+            is_large = height * width > 10000 * 10000  # More than 100 million pixels
+            
             for i in range(1, src.count + 1):
-                band_data = src.read(i)
+                if is_large:
+                    # Sample a window from the center
+                    window = rasterio.windows.Window(
+                        width // 2 - 500,
+                        height // 2 - 500,
+                        min(1000, width),
+                        min(1000, height)
+                    )
+                    band_data = src.read(i, window=window)
+                else:
+                    band_data = src.read(i)
+                    
                 if src.nodata is not None:
                     band_data = band_data[band_data != src.nodata]
+                
+                # Sample if still too large
+                if len(band_data.flatten()) > sample_size:
+                    indices = np.random.choice(len(band_data.flatten()), sample_size, replace=False)
+                    band_data = band_data.flatten()[indices]
                 
                 hist, bin_edges = np.histogram(band_data, bins=bins)
                 histogram[f'band_{i}'] = {
@@ -361,7 +383,9 @@ def get_histogram():
                     'min': float(band_data.min()),
                     'max': float(band_data.max()),
                     'mean': float(band_data.mean()),
-                    'std': float(band_data.std())
+                    'std': float(band_data.std()),
+                    'sample_size': len(band_data.flatten()),
+                    'sampled': is_large
                 }
             
             return jsonify(histogram)
@@ -385,8 +409,8 @@ def get_bev_metadata():
     import requests
     import xml.etree.ElementTree as ET
     
-    data = request.json
-    record_id = data.get('id')
+    data = request.get_json()
+    record_id = data.get('id') if data else None
     
     if not record_id:
         return jsonify({'error': 'No record ID provided'}), 400

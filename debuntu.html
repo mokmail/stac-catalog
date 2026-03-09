@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debian vs. Ubuntu - Systemvergleich</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!--
+    Palette: "Vibrant Linux" (Debian Crimson #D70A53, Ubuntu Orange #E95420, Deep Slate #0F172A, Bright Blue #2563EB)
+    Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in the output.
+    Narrative Plan:
+    1. Introduction: High-level overview of the two distributions and their shared DNA.
+    2. Core Philosophy & Footprint (Radar Chart): Visual comparison of their architectural focus (Stability vs. Convenience).
+    3. Release Cycles (Bar Chart): Comparing the update and maintenance strategies.
+    4. Target Audiences (HTML/CSS Grid): Structured breakdown of ideal use cases for each system.
+    5. Conclusion: Final recommendation based on user priorities.
+    Chart Choices:
+    - Data Point 1 (System Characteristics) -> Goal: Compare -> Chosen Visualization: Radar Chart -> Justification: Excellent for comparing multiple multivariate profiles across two distinct entities. Method: Chart.js (Canvas, NO SVG).
+    - Data Point 2 (Release Cycles) -> Goal: Compare/Inform -> Chosen Visualization: Horizontal Bar Chart -> Justification: Clearly illustrates time durations (months) for release cycles side-by-side. Method: Chart.js (Canvas, NO SVG).
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+
+        .stat-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .bg-debian {
+            background-color: #D70A53;
+        }
+
+        .bg-ubuntu {
+            background-color: #E95420;
+        }
+
+        .text-debian {
+            color: #D70A53;
+        }
+
+        .text-ubuntu {
+            color: #E95420;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100 text-slate-800 antialiased">
+
+    <header class="bg-slate-900 text-white py-16 px-4 shadow-xl relative overflow-hidden">
+        <div class="max-w-5xl mx-auto relative z-10 text-center">
+            <span
+                class="inline-block py-1 px-3 rounded-full bg-blue-600 text-xs font-bold tracking-wider uppercase mb-4">Linux
+                Distributionen im Vergleich</span>
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight">Debian <span
+                    class="text-slate-400 font-light">vs.</span> Ubuntu</h1>
+            <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed">
+                Zwei der populärsten Betriebssysteme der Welt. Sie teilen dieselbe DNA, verfolgen aber fundamental
+                unterschiedliche Philosophien. Welches System passt am besten zu Ihren Anforderungen?
+            </p>
+        </div>
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none"
+            style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12 space-y-16">
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-[#D70A53] stat-card">
+                <div class="flex items-center mb-6">
+                    <div
+                        class="w-12 h-12 rounded-full bg-debian flex items-center justify-center text-white text-2xl font-bold shadow-md mr-4">
+                        D</div>
+                    <h2 class="text-3xl font-bold text-slate-900">Debian</h2>
+                </div>
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    Die "Mutter" vieler Distributionen. Entwickelt von einer weltweiten Freiwilligen-Gemeinschaft.
+                    Debian legt höchsten Wert auf Software-Freiheit, extreme Stabilität und einen ressourcenschonenden
+                    Betrieb.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm font-semibold border border-slate-200">🛡️
+                        Unverwüstlich</span>
+                    <span
+                        class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm font-semibold border border-slate-200">⚙️
+                        Community-Driven</span>
+                    <span
+                        class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm font-semibold border border-slate-200">⏱️
+                        When it's ready</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-[#E95420] stat-card">
+                <div class="flex items-center mb-6">
+                    <div
+                        class="w-12 h-12 rounded-full bg-ubuntu flex items-center justify-center text-white text-2xl font-bold shadow-md mr-4">
+                        U</div>
+                    <h2 class="text-3xl font-bold text-slate-900">Ubuntu</h2>
+                </div>
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    Basiert technisch auf Debian, wird aber von Canonical Ltd. herausgegeben. Der Fokus liegt auf
+                    extremer Benutzerfreundlichkeit, aktueller Software und einem reibungslosen
+                    "Out-of-the-box"-Erlebnis für Desktop und Server.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm font-semibold border border-slate-200">🚀
+                        Einsteigerfreundlich</span>
+                    <span
+                        class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm font-semibold border border-slate-200">📦
+                        Snap & PPA</span>
+                    <span
+                        class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm font-semibold border border-slate-200">📅
+                        Fixer Zyklus</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8 border border-slate-100">
+            <div class="mb-8 text-center max-w-3xl mx-auto">
+                <span class="text-blue-600 font-bold tracking-wider uppercase text-sm">Leistung & Architektur</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2 mb-4">Systemcharakteristika im Vergleich</h2>
+                <p class="text-slate-600">
+                    Während Debian auf maximale Ressourcenschonung und Langzeitstabilität setzt, priorisiert Ubuntu
+                    Hardware-Kompatibilität und den Zugang zu den neuesten Softwareversionen. Dieses Radar-Diagramm
+                    visualisiert diese Kompromisse.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+                <div class="lg:col-span-3">
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-slate-800 flex items-center">
+                            <span class="w-3 h-3 rounded-full bg-debian mr-2"></span> Stabilität & Ressourcen
+                        </h4>
+                        <p class="text-sm text-slate-600 mt-2">Debian verzichtet auf viele Hintergrunddienste und
+                            proprietäre Treiber in der Standardinstallation. Das resultiert in einem "bloat-free" System
+                            mit minimalem RAM-Verbrauch.</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-slate-800 flex items-center">
+                            <span class="w-3 h-3 rounded-full bg-ubuntu mr-2"></span> Aktualität & Komfort
+                        </h4>
+                        <p class="text-sm text-slate-600 mt-2">Ubuntu lädt proprietäre Firmware und Komfort-Dienste (wie
+                            das Snap-System) standardmäßig. Dies kostet minimal Leistung, spart dem Nutzer aber Stunden
+                            bei der Einrichtung von Hardware und aktueller Software.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-slate-900 text-white rounded-2xl shadow-xl p-8 lg:p-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-blue-400 font-bold tracking-wider uppercase text-sm">Zeitplanung</span>
+                    <h2 class="text-3xl font-bold mt-2 mb-6">Release-Zyklen</h2>
+                    <p class="text-slate-300 mb-6 leading-relaxed">
+                        Die Veröffentlichungsstrategie ist einer der größten Unterschiede. Ubuntu bietet
+                        Planungssicherheit für Unternehmen durch strikte 6-Monats-Zyklen und 2-jährige Long Term Support
+                        (LTS) Versionen.
+                    </p>
+                    <p class="text-slate-300 leading-relaxed">
+                        Debian folgt der Philosophie "When it's ready". Eine neue Stable-Version erscheint erst, wenn
+                        alle kritischen Fehler behoben sind (historisch ca. alle 24 Monate). Dies garantiert ein absolut
+                        fehlerfreies System.
+                    </p>
+                </div>
+                <div>
+                    <div class="chart-container bg-slate-800 rounded-xl p-4 border border-slate-700">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="text-center mb-10">
+                <span class="text-blue-600 font-bold tracking-wider uppercase text-sm">Entscheidungshilfe</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">Welches System für wen?</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-debian flex items-start">
+                    <div class="text-4xl mr-4 mt-1">🖥️</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Für Server & Administratoren</h3>
+                        <p class="text-slate-600 text-sm">
+                            <strong class="text-debian">Empfehlung: Debian.</strong> Wo maximale Stabilität und
+                            Sicherheit oberste Priorität haben und der Admin volle Kontrolle über jedes Paket wünscht,
+                            ist Debian unschlagbar.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-ubuntu flex items-start">
+                    <div class="text-4xl mr-4 mt-1">💻</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Für Desktop & Einsteiger</h3>
+                        <p class="text-slate-600 text-sm">
+                            <strong class="text-ubuntu">Empfehlung: Ubuntu.</strong> Wer ein System sucht, das "einfach
+                            funktioniert", moderne Hardware sofort erkennt und sich ohne Terminal-Kenntnisse bedienen
+                            lässt.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-debian flex items-start">
+                    <div class="text-4xl mr-4 mt-1">💾</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Für alte Hardware & Puristen</h3>
+                        <p class="text-slate-600 text-sm">
+                            <strong class="text-debian">Empfehlung: Debian.</strong> Aufgrund des sehr geringen
+                            Overheads haucht Debian auch 10 Jahre alten Laptops neues Leben ein. Ideal für Verfechter
+                            reiner Open-Source-Software.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-ubuntu flex items-start">
+                    <div class="text-4xl mr-4 mt-1">👨‍💻</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Für Entwickler & Unternehmen</h3>
+                        <p class="text-slate-600 text-sm">
+                            <strong class="text-ubuntu">Empfehlung: Ubuntu.</strong> Viele Entwickler-Tools und
+                            kommerzielle Softwareanbieter optimieren primär für Ubuntu. Unternehmen profitieren vom
+                            optionalen "Ubuntu Pro" Support.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center border-t border-slate-800 mt-12">
+        <p class="text-sm">Infografik basierend auf der Analyse von Debian und Ubuntu. Fazit: Ein "Besser" gibt es
+            nicht, nur ein "Passender".</p>
+    </footer>
+
+    <script>
+        function wrapLabel(label, limit = 16) {
+            if (label.length <= limit) return label;
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + words[i].length + 1 <= limit) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const rawRadarLabels = ['Stabilität & Langzeitsupport', 'Software-Aktualität', 'Hardware-Auto-Erkennung', 'Ressourcenschonung', 'Anfängerfreundlichkeit'];
+        const processedRadarLabels = rawRadarLabels.map(label => wrapLabel(label));
+
+        const radarCtx = document.getElementById('radarChart').getContext('2d');
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: processedRadarLabels,
+                datasets: [
+                    {
+                        label: 'Debian',
+                        data: [10, 3, 6, 10, 4],
+                        backgroundColor: 'rgba(215, 10, 83, 0.2)',
+                        borderColor: 'rgba(215, 10, 83, 1)',
+                        pointBackgroundColor: 'rgba(215, 10, 83, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Ubuntu',
+                        data: [7, 9, 10, 5, 10],
+                        backgroundColor: 'rgba(233, 84, 32, 0.2)',
+                        borderColor: 'rgba(233, 84, 32, 1)',
+                        pointBackgroundColor: 'rgba(233, 84, 32, 1)',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                        grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                        pointLabels: {
+                            font: { family: "'Inter', sans-serif", size: 12, weight: '600' },
+                            color: '#1E293B'
+                        },
+                        ticks: { display: false, min: 0, max: 10 }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom', labels: { font: { family: "'Inter', sans-serif", size: 14 } } },
+                    tooltip: {
+                        callbacks: {
+                            title: function (tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const rawBarLabels = ['Debian Stable', 'Ubuntu Standard', 'Ubuntu LTS'];
+        const processedBarLabels = rawBarLabels.map(label => wrapLabel(label));
+
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: processedBarLabels,
+                datasets: [
+                    {
+                        label: 'Monate bis zum nächsten Release (ca.)',
+                        data: [24, 6, 24],
+                        backgroundColor: [
+                            'rgba(215, 10, 83, 0.8)',
+                            'rgba(233, 84, 32, 0.8)',
+                            'rgba(37, 99, 235, 0.8)'
+                        ],
+                        borderWidth: 0,
+                        borderRadius: 6
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: '#94A3B8', font: { family: "'Inter', sans-serif" } },
+                        title: { display: true, text: 'Dauer in Monaten', color: '#CBD5E1' }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#F8FAFC', font: { family: "'Inter', sans-serif", weight: '600' } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: function (tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

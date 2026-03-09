@@ -3,6 +3,7 @@ import * as L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import parseGeoraster from 'georaster'
 import GeoRasterLayer from 'georaster-layer-for-leaflet'
+import shp from 'shpjs'
 import proj4 from 'proj4'
 
 // Add Austrian coordinate systems
@@ -12,6 +13,7 @@ proj4.defs("EPSG:25832", "+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs");
 proj4.defs("EPSG:25833", "+proj=utm +zone=33 +datum=WGS84 +units=m +no_defs");
 proj4.defs("EPSG:31287", "+proj=tmerc +lat_0=0 +lon_0=13.3333333333333 +k=1 +x_0=450000 +y_0=-5000000 +ellps=bessel +towgs84=577.326,90.129,463.919,5.137,1.474,5.297,2.4232 +units=m +no_defs");
 proj4.defs("EPSG:5778", "+proj=longlat +datum=WGS84 +no_defs");
+proj4.defs("EPSG:4326", "+proj=longlat +datum=WGS84 +no_defs");
 
 if (typeof window !== 'undefined') {
   window.proj4 = proj4;
@@ -72,7 +74,9 @@ const MapViewer = ({ item }) => {
   const [wmsUrl, setWmsUrl] = useState('')
   const [detectedWmsUrl, setDetectedWmsUrl] = useState('')
   const [detectedCogUrl, setDetectedCogUrl] = useState('')
+  const [detectedShpUrl, setDetectedShpUrl] = useState('')
   const [loading, setLoading] = useState(false)
+  const [shpLoading, setShpLoading] = useState(false)
   const [error, setError] = useState(null)
 
   // Map layer options
@@ -234,6 +238,31 @@ const MapViewer = ({ item }) => {
     const wmsAssetUrl = findWmsAsset()
     setDetectedWmsUrl(wmsAssetUrl || '')
 
+    // Try to find Shapefile/GeoJSON asset
+    const findShpAsset = () => {
+      for (const key in item.assets) {
+        const asset = item.assets[key]
+        const href = asset.href
+        const type = asset.type || ''
+        
+        // Look for shapefile, geojson, or kml
+        if (href?.includes('.shp') || href?.includes('.geojson') || 
+            href?.includes('.json') || type.includes('geojson') ||
+            href?.includes('.kml') || type.includes('kml')) {
+          return href
+        }
+      }
+      return null
+    }
+    
+    const shpAssetUrl = findShpAsset()
+    setDetectedShpUrl(shpAssetUrl || '')
+    
+    // Auto-load shapefile if found
+    if (shpAssetUrl) {
+      loadShapefileLayer(shpAssetUrl)
+    }
+
     // Use proxy URL for COG
     const proxyCogUrl = getProxyUrl(cogUrl)
 
@@ -262,6 +291,11 @@ const MapViewer = ({ item }) => {
         }
         
         console.log("GeoRaster loaded:", georaster)
+        console.log("CRS:", georaster.crs)
+        
+        // Get CRS from metadata or item properties
+        const crs = georaster.crs || item.properties?.['bev:crs']?.[0] || 'EPSG:31255'
+        console.log("Using CRS:", crs)
         
         const layer = new GeoRasterLayer({
           georaster: georaster,
@@ -399,6 +433,80 @@ const MapViewer = ({ item }) => {
     }
   }
 
+  const loadShapefileLayer = async (url) => {
+    const map = mapInstanceRef.current
+    if (!map) return
+    
+    // Convert URL if needed
+    let fetchUrl = url
+    if (url.includes('data.bev.gv.at')) {
+      const path = url.replace('https://data.bev.gv.at', '')
+      fetchUrl = window.location.origin + '/bev-download' + path
+    }
+    
+    setShpLoading(true)
+    console.log("Loading shapefile from:", fetchUrl)
+    
+    try {
+      // Remove existing shapefile layer
+      if (layersRef.current.shp) {
+        map.removeLayer(layersRef.current.shp)
+        layersRef.current.shp = null
+      }
+      
+      // Fetch the shapefile/geojson
+      const response = await fetch(fetchUrl)
+      let geojson
+      
+      if (url.toLowerCase().endsWith('.shp')) {
+        const arrayBuffer = await response.arrayBuffer()
+        geojson = await shp(arrayBuffer)
+      } else {
+        geojson = await response.json()
+      }
+      
+      if (!isMountedRef.current) return
+      
+      // Create and add layer
+      const shpLayer = L.geoJSON(geojson, {
+        style: {
+          color: '#e74c3c',
+          weight: 2,
+          fillColor: '#e74c3c',
+          fillOpacity: 0.3
+        }
+      })
+      
+      shpLayer.addTo(map)
+      layersRef.current.shp = shpLayer
+      
+      // Fit bounds
+      const bounds = shpLayer.getBounds()
+      if (bounds.isValid()) {
+        map.fitBounds(bounds, { padding: [50, 50] })
+      }
+      
+      console.log("Shapefile loaded successfully")
+    } catch (err) {
+      console.error("Error loading shapefile:", err)
+      setError('Failed to load shapefile: ' + err.message)
+    } finally {
+      setShpLoading(false)
+    }
+  }
+
+  const toggleShpLayer = () => {
+    const map = mapInstanceRef.current
+    if (!map) return
+    
+    if (layersRef.current.shp) {
+      map.removeLayer(layersRef.current.shp)
+      layersRef.current.shp = null
+    } else if (detectedShpUrl) {
+      loadShapefileLayer(detectedShpUrl)
+    }
+  }
+
   const switchBaseLayer = (layerName) => {
     const map = mapInstanceRef.current
     if (!map) return
@@ -509,6 +617,18 @@ const MapViewer = ({ item }) => {
           </label>
         )}
 
+        {detectedShpUrl && (
+          <label style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px', cursor: 'pointer' }}>
+            <input
+              type="checkbox"
+              checked={!!layersRef.current.shp}
+              onChange={toggleShpLayer}
+              style={{ width: '18px', height: '18px', accentColor: '#e74c3c' }}
+            />
+            <span style={{ fontSize: '0.85rem', color: '#5d6d7e' }}>Shapefile {shpLoading ? '⏳' : '✓'}</span>
+          </label>
+        )}
+
         {/* Map Opacity */}
         <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid #eef2f6' }}>
           <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem', color: '#7f8c8d' }}>
@@ -598,8 +718,9 @@ const MapViewer = ({ item }) => {
       }}>
         {item.geometry.type === 'Polygon' ? '📐 Polygon' : '📍 Point'}
         {detectedCogUrl ? ' • 🖼️ COG' : ''}
-        {detectedWmsUrl ? ' • 🗺️ WMS' : ' • No WMS'}
-        {!detectedCogUrl && !detectedWmsUrl ? ' • No layers' : ''}
+        {detectedWmsUrl ? ' • 🗺️ WMS' : ''}
+        {detectedShpUrl ? ' • 📍 SHP' : ''}
+        {!detectedCogUrl && !detectedWmsUrl && !detectedShpUrl ? ' • No layers' : ''}
       </div>
     </div>
   )
