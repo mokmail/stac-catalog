@@ -5,6 +5,17 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    host: true
+    host: true,
+    proxy: {
+      '/bev-download': {
+        target: 'https://data.bev.gv.at',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/bev-download/, '')
+      },
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true
+      }
+    }
   }
 })

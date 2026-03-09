@@ -1,0 +1,786 @@
+{
+  "type": "FeatureCollection",
+  "stac_version": "1.0.0",
+  "features": [
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-km500-20251001",
+      "collection": "KM500",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              9.53,
+              46.37
+            ],
+            [
+              17.17,
+              46.37
+            ],
+            [
+              17.17,
+              49.02
+            ],
+            [
+              9.53,
+              49.02
+            ],
+            [
+              9.53,
+              46.37
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "KM500 Austria 2025-10-01",
+        "description": "Kartographisches Modell 1:500.000 Raster - digitales Kartenbild ganz \u00d6sterreich",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/KM_R/KM500/20251001/KM500_R_CRS3416_508dpi_Farbbild_COG_20251001.tif",
+          "title": "KM500 Austria 2025-10-01",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-km250-utm32-20250902",
+      "collection": "KM250_UTM32",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              9.5,
+              46.5
+            ],
+            [
+              12.0,
+              46.5
+            ],
+            [
+              12.0,
+              49.0
+            ],
+            [
+              9.5,
+              49.0
+            ],
+            [
+              9.5,
+              46.5
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "KM250 UTM32 2025-09-02",
+        "description": "Kartographisches Modell 1:250.000 Raster - UTM Zone 32",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/KM_R/KM250/20250902/KM250_R_CRS25832_508dpi_Farbbild_COG_20250902.tif",
+          "title": "KM250 UTM32 2025-09-02",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-km250-utm33-20250902",
+      "collection": "KM250_UTM33",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              12.0,
+              46.5
+            ],
+            [
+              17.17,
+              46.5
+            ],
+            [
+              17.17,
+              49.0
+            ],
+            [
+              12.0,
+              49.0
+            ],
+            [
+              12.0,
+              46.5
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "KM250 UTM33 2025-09-02",
+        "description": "Kartographisches Modell 1:250.000 Raster - UTM Zone 33",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/KM_R/KM250/20250902/KM250_R_CRS25833_508dpi_Farbbild_COG_20250902.tif",
+          "title": "KM250 UTM33 2025-09-02",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-lc-mosaik-2024",
+      "collection": "LandCover",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              12.0,
+              47.0
+            ],
+            [
+              17.0,
+              47.0
+            ],
+            [
+              17.0,
+              49.0
+            ],
+            [
+              12.0,
+              49.0
+            ],
+            [
+              12.0,
+              47.0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "Land Cover Mosaik 2024",
+        "description": "Bodenbedeckungsdaten (Land Cover) - Jahresmosaik 2024",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/LC/20241015/2023450_Mosaik_LC.tif",
+          "title": "Land Cover Mosaik 2024",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-lc-2023-10150",
+      "collection": "LandCover_2023",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              12.0,
+              47.0
+            ],
+            [
+              17.0,
+              47.0
+            ],
+            [
+              17.0,
+              49.0
+            ],
+            [
+              12.0,
+              49.0
+            ],
+            [
+              12.0,
+              47.0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "Land Cover 2023 - Blatt Nordwest",
+        "description": "Bodenbedeckungsdaten (Land Cover) - Blatt Nordwest - 2023",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/LC/20231015/2020{sheet}_Mosaik_LC.tif",
+          "title": "Land Cover 2023 - Blatt Nordwest",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-lc-2023-10160",
+      "collection": "LandCover_2023",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              12.0,
+              47.0
+            ],
+            [
+              17.0,
+              47.0
+            ],
+            [
+              17.0,
+              49.0
+            ],
+            [
+              12.0,
+              49.0
+            ],
+            [
+              12.0,
+              47.0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "Land Cover 2023 - Blatt West",
+        "description": "Bodenbedeckungsdaten (Land Cover) - Blatt West - 2023",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/LC/20231015/2020{sheet}_Mosaik_LC.tif",
+          "title": "Land Cover 2023 - Blatt West",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-lc-2023-10170",
+      "collection": "LandCover_2023",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              12.0,
+              47.0
+            ],
+            [
+              17.0,
+              47.0
+            ],
+            [
+              17.0,
+              49.0
+            ],
+            [
+              12.0,
+              49.0
+            ],
+            [
+              12.0,
+              47.0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "Land Cover 2023 - Blatt S\u00fcdwest",
+        "description": "Bodenbedeckungsdaten (Land Cover) - Blatt S\u00fcdwest - 2023",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/LC/20231015/2020{sheet}_Mosaik_LC.tif",
+          "title": "Land Cover 2023 - Blatt S\u00fcdwest",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-lc-2023-10250",
+      "collection": "LandCover_2023",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              12.0,
+              47.0
+            ],
+            [
+              17.0,
+              47.0
+            ],
+            [
+              17.0,
+              49.0
+            ],
+            [
+              12.0,
+              49.0
+            ],
+            [
+              12.0,
+              47.0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "Land Cover 2023 - Blatt Nord",
+        "description": "Bodenbedeckungsdaten (Land Cover) - Blatt Nord - 2023",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/LC/20231015/2020{sheet}_Mosaik_LC.tif",
+          "title": "Land Cover 2023 - Blatt Nord",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-lc-2023-10260",
+      "collection": "LandCover_2023",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              12.0,
+              47.0
+            ],
+            [
+              17.0,
+              47.0
+            ],
+            [
+              17.0,
+              49.0
+            ],
+            [
+              12.0,
+              49.0
+            ],
+            [
+              12.0,
+              47.0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "Land Cover 2023 - Blatt Mitte",
+        "description": "Bodenbedeckungsdaten (Land Cover) - Blatt Mitte - 2023",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/LC/20231015/2020{sheet}_Mosaik_LC.tif",
+          "title": "Land Cover 2023 - Blatt Mitte",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-lc-2023-10270",
+      "collection": "LandCover_2023",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              12.0,
+              47.0
+            ],
+            [
+              17.0,
+              47.0
+            ],
+            [
+              17.0,
+              49.0
+            ],
+            [
+              12.0,
+              49.0
+            ],
+            [
+              12.0,
+              47.0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "Land Cover 2023 - Blatt S\u00fcd",
+        "description": "Bodenbedeckungsdaten (Land Cover) - Blatt S\u00fcd - 2023",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/LC/20231015/2020{sheet}_Mosaik_LC.tif",
+          "title": "Land Cover 2023 - Blatt S\u00fcd",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-lc-2023-10350",
+      "collection": "LandCover_2023",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              12.0,
+              47.0
+            ],
+            [
+              17.0,
+              47.0
+            ],
+            [
+              17.0,
+              49.0
+            ],
+            [
+              12.0,
+              49.0
+            ],
+            [
+              12.0,
+              47.0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "Land Cover 2023 - Blatt Nordost",
+        "description": "Bodenbedeckungsdaten (Land Cover) - Blatt Nordost - 2023",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/LC/20231015/2020{sheet}_Mosaik_LC.tif",
+          "title": "Land Cover 2023 - Blatt Nordost",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-lc-2023-10360",
+      "collection": "LandCover_2023",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              12.0,
+              47.0
+            ],
+            [
+              17.0,
+              47.0
+            ],
+            [
+              17.0,
+              49.0
+            ],
+            [
+              12.0,
+              49.0
+            ],
+            [
+              12.0,
+              47.0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "Land Cover 2023 - Blatt Ost",
+        "description": "Bodenbedeckungsdaten (Land Cover) - Blatt Ost - 2023",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/LC/20231015/2020{sheet}_Mosaik_LC.tif",
+          "title": "Land Cover 2023 - Blatt Ost",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    },
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "id": "bev-lc-2023-10370",
+      "collection": "LandCover_2023",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              12.0,
+              47.0
+            ],
+            [
+              17.0,
+              47.0
+            ],
+            [
+              17.0,
+              49.0
+            ],
+            [
+              12.0,
+              49.0
+            ],
+            [
+              12.0,
+              47.0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "datetime": "2024-01-01T00:00:00Z",
+        "title": "Land Cover 2023 - Blatt S\u00fcdost",
+        "description": "Bodenbedeckungsdaten (Land Cover) - Blatt S\u00fcdost - 2023",
+        "license": "CC-BY-4.0",
+        "creators": [
+          "Bundesamt f\u00fcr Eich- und Vermessungswesen (BEV)"
+        ],
+        "bev:type": "raster"
+      },
+      "assets": {
+        "data": {
+          "href": "/bev-download/download/LC/20231015/2020{sheet}_Mosaik_LC.tif",
+          "title": "Land Cover 2023 - Blatt S\u00fcdost",
+          "type": "image/tiff",
+          "roles": [
+            "data"
+          ]
+        }
+      },
+      "links": [
+        {
+          "rel": "source",
+          "href": "https://data.bev.gv.at/geonetwork/srv/eng/catalog.search",
+          "title": "BEV Metadata Catalog"
+        }
+      ]
+    }
+  ]
+}

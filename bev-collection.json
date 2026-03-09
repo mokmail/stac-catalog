@@ -1,0 +1,38 @@
+{
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "id": "bev-geotiff-collection",
+  "title": "BEV GeoTIFF Collection",
+  "description": "Collection of all GeoTIFF datasets from BEV data catalog",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          9.53,
+          46.37,
+          17.17,
+          49.02
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2020-01-01T00:00:00Z",
+          "2025-12-31T00:00:00Z"
+        ]
+      ]
+    }
+  },
+  "license": "CC-BY-4.0",
+  "links": [
+    {
+      "rel": "self",
+      "href": "collection.json"
+    },
+    {
+      "rel": "root",
+      "href": "catalog.json"
+    }
+  ]
+}
