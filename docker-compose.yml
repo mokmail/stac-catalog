@@ -1,0 +1,58 @@
+services:
+  titiler:
+    build:
+      context: ./titiler
+      dockerfile: Dockerfile
+    container_name: stac-titiler
+    environment:
+      AWS_ACCESS_KEY_ID: ""
+      AWS_SECRET_ACCESS_KEY: ""
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api.html"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    networks:
+      - stac-network
+    ports:
+      - "8074:8000"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: stac-backend
+    environment:
+      - PORT=3000
+      - TITILER_URL=http://titiler:8000
+      - BEV_URL=https://data.bev.gv.at
+    ports:
+      - "8073:3000"
+    depends_on:
+      titiler:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - stac-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: stac-frontend
+    ports:
+      - "8075:80"
+    depends_on:
+      - backend
+    networks:
+      - stac-network
+
+networks:
+  stac-network:
+    driver: bridge

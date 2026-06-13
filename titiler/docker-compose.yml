@@ -1,0 +1,19 @@
+# Standalone TiTiler service.
+# For the full stack (frontend + backend + TiTiler), use the root docker-compose.yml.
+services:
+  titiler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stac-titiler
+    ports:
+      - "8000:8000"
+    environment:
+      AWS_ACCESS_KEY_ID: ""
+      AWS_SECRET_ACCESS_KEY: ""
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api.html"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
